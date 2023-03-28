@@ -1,0 +1,12 @@
+{
+  "name": "hashwizard",
+  "version": "1.0.0",
+  "description": "hashwizard is a suite of tools and APIs that allow you to interact with `hashing`, this includes",
+  "main": "./index.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node server.js"
+  },
+  "author": "Aadvik <aadv1k@outlook.com>",
+  "license": "MIT"
+}
