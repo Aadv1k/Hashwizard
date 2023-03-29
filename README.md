@@ -2,6 +2,20 @@
 
 is a suite of tools and APIs that allow you to interact with `hashing`
 
+## Get
+
+### Server
+
+```shell
+node ./index.js
+```
+
+### Test
+
+```shell
+node ./tests/*.test.js
+```
+
 ## API
 
 ### `/api/hash/`
@@ -40,8 +54,4 @@ hash the provided text using the `{hash}` function
    "message" : "the text parameter was not provided for `/api/hash`",
    "status" : 400
 }
-````
-
-
-
-
+```
