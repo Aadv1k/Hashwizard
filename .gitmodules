@@ -1,0 +1,3 @@
+[submodule "nod"]
+	path = nod
+	url = git@github.com:aadv1k/nod
