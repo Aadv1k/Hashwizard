@@ -4,7 +4,7 @@ const { ERROR } = require("../common/const");
 const crypto = require("crypto");
 const querystring = require("querystring");
 
-module.exports = ({url}, res) => {
+module.exports = ({ url }, res) => {
   const [_e, _a, _f, hashAlgorithm] = url.split('?').shift().split('/');
   const avaliableHashes = ["md5", "sha256"]
 

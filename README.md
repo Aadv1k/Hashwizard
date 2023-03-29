@@ -19,13 +19,27 @@ hash the provided text using the `{hash}` function
 #### Success
 
 ```json
-{}
+{
+   "hash" : "5d41402abc4b2a76b9719d911017c592",
+   "status" : 200,
+   "text" : "hello"
+}
 ```
 
 #### Error
 
 ```json
-{}
+{
+   "error" : "invalid-hash-function",
+   "message" : "the hash function specified is not valid",
+   "status" : 400
+},
+
+{
+   "error" : "missing-text-param",
+   "message" : "the text parameter was not provided for `/api/hash`",
+   "status" : 400
+}
 ````
 
 
