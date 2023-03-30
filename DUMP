@@ -1,0 +1,17 @@
+[INFO] Fetching data for sha1
+[INFO] Dumped data for sha1 to ./data/data-sha1.json
+[INFO] Fetching data for sha256
+[INFO] Dumped data for sha256 to ./data/data-sha256.json
+[INFO] Fetching data for md5
+[INFO] Dumped data for md5 to ./data/data-md5.json
+server listening at http://localhost:3000
+/home/goga/coding/hashwizard/routes/crack.js:32
+  if (existsSync(`../data/data-${hash}.json`)) {
+  ^
+
+ReferenceError: existsSync is not defined
+    at module.exports (/home/goga/coding/hashwizard/routes/crack.js:32:3)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Server.<anonymous> (/home/goga/coding/hashwizard/server.js:15:5)
+
+Node.js v18.12.1
