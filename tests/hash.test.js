@@ -21,7 +21,7 @@ const baseURL = `http://localhost:${PORT}`;
 
 console.log("GET /api/:hash");
 
-new test("the status should be 400", async (t) => {
+new test("the error should match `invalid-hash-function`", async (t) => {
   let response = await get(`${baseURL}/api/hash`);
   let data = JSON.parse(response);
 
@@ -30,17 +30,33 @@ new test("the status should be 400", async (t) => {
   t.pass();
 });
 
-new test("msg should return valid md5 hash", async (t) => {
+new test("msg should return valid sha1 hash", async (t) => {
   let msg = "hello";
-  let hashedMsg = "5d41402abc4b2a76b9719d911017c592";
+  let hashedMsg = "aaf4c61ddcc5e8a2dabede0f3b482cd9aea9434d";
 
-  let response = await get(`${baseURL}/api/hash/md5?text=${msg}`);
+  let response = await get(`${baseURL}/api/hash/sha1?text=${msg}`);
   let data = JSON.parse(response);
 
   t.is(data.status, 200);
   t.is(data.hash, hashedMsg);
   t.pass();
-  child.kill();
-});
 
+})
+
+setTimeout(() => {
+  new test("msg should return valid md5 hash", async (t) => {
+    let msg = "hello";
+    let hashedMsg = "5d41402abc4b2a76b9719d911017c592";
+
+    let response = await get(`${baseURL}/api/hash/md5?text=${msg}`);
+    let data = JSON.parse(response);
+
+    t.is(data.status, 200);
+    t.is(data.hash, hashedMsg);
+    t.pass();
+    child.kill();
+  });
+
+
+}, 500)
 
