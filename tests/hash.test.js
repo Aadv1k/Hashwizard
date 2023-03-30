@@ -3,7 +3,7 @@ const { spawn } = require("child_process");
 
 const http = require("http");
 
-const test = require("../nod/testing/basic");
+const test = require("../lib/nod/testing/basic");
 
 function get(url) {
   return new Promise((resolve, reject) => {
