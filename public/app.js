@@ -37,6 +37,8 @@ formHash.addEventListener("submit", async (e) => {
   formHashSubmit.classList.add("btn--loader-show");
 
   let {formHashAlgorithm, textToHash} = Object.fromEntries(new FormData(e.target));
+  textToHash = textToHash.trim();
+
   let res = await fetch(`/api/hash/${formHashAlgorithm}?text=${encodeURI(textToHash)}`)
   let data = await res.json()
 
@@ -77,6 +79,7 @@ formCrack.addEventListener("submit", async (e) => {
   formCrackSubmit.classList.add("btn--loader-show");
 
   let {formCrackAlgorithm, textToCrack} = Object.fromEntries(new FormData(e.target));
+  textToCrack = textToCrack.trim();
   let res = await fetch(`/api/crack/${formCrackAlgorithm}?hash=${encodeURI(textToCrack)}`)
   let data = await res.json()
 
