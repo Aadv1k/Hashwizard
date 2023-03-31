@@ -3,16 +3,19 @@ const handleRouteCrack = require("./routes/crack");
 
 const http = require("http");
 
+const { sendPublicFile } = require("./common/utils");
+
 module.exports = http.createServer(async (req, res) => {
   const { url } = req;
 
   if (url === "/") {
-    res.writeHead(200, {"Content-type": "text/html"});
-    res.write("<h1>foo world</h1>");
+    sendPublicFile(res, "./public/index.html");
   } else if (url.startsWith("/api/hash")) {
     handleRouteHash(req, res)
   } else if (url.startsWith("/api/crack")) {
     await handleRouteCrack(req, res)
+  } else {
+    sendPublicFile(res, `./public/${url}`);
   }
   res.end();
 });

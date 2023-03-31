@@ -10,6 +10,11 @@ is a suite of tools and APIs that allow you to interact with `hashing`
 node ./index.js
 ```
 
+```shell
+--port=3000 # explicitly specify the port
+--no-dump # disables fetching initial load
+```
+
 **NOTE**: this will attempt to cache the entir rainbow table from a MongoDB Atlas database, if the line is commented out the `/api/crack` will instead directly query the database. This measure is put in place to reduce the average response time from `00:00:41` to `00:00:10`
 
 ### Test
