@@ -8,7 +8,7 @@ module.exports = {
 
   sendPublicFile: (res, path, code = 200) => {
     if (!existsSync(path)) {
-      const content = readFileSync("../public/404.html", "utf-8");
+      const content = readFileSync("./public/404.html", "utf-8");
       res.writeHead(code, { "Content-type": "text/html" });
       res.write(content);
       return;
