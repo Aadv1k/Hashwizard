@@ -12,18 +12,7 @@ function copyClick(e) {
   navigator.clipboard.writeText(e.getAttribute('data-hash'))
 }
 
-
-formHash.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  let {formHashAlgorithm, textToHash} = Object.fromEntries(new FormData(e.target));
-  let res = await fetch(`/api/hash/${formHashAlgorithm}?text=${encodeURI(textToHash)}`)
-  let data = await res.json()
-
-  if (!res.ok) {
-    console.error("error");
-    return;
-  }
-  
+function pushHashItemToHTMLList(data, formHashAlgorithm) {
   formHashOutput.insertAdjacentHTML("afterbegin", `
     <li>
       <div class="content">
@@ -32,28 +21,38 @@ formHash.addEventListener("submit", async (e) => {
         </span>
 
         <span class="output">
-        Hash: <code>${data.hash}</code>
+        ${formHashAlgorithm.toUpperCase()}: <code>${data.hash}</code>
         </span>
       </div>
 
       <button class="btn btn--primary" id="copyBtn" data-hash=${data.hash} onclick="copyClick(this)">Copy</button>
     </li>
   `);
-})
+}
 
-
-
-formCrack.addEventListener("submit", async (e) => {
+formHash.addEventListener("submit", async (e) => {
   e.preventDefault();
-  let {formCrackAlgorithm, textToCrack} = Object.fromEntries(new FormData(e.target));
-  let res = await fetch(`/api/crack/${formCrackAlgorithm}?hash=${encodeURI(textToCrack)}`)
+
+  formHashSubmit.classList.add("btn--disabled");
+  formHashSubmit.classList.add("btn--loader-show");
+
+  let {formHashAlgorithm, textToHash} = Object.fromEntries(new FormData(e.target));
+  let res = await fetch(`/api/hash/${formHashAlgorithm}?text=${encodeURI(textToHash)}`)
   let data = await res.json()
 
   if (!res.ok) {
     console.error("error");
     return;
   }
-  
+
+  formHashSubmit.classList.remove("btn--disabled");
+  formHashSubmit.classList.remove("btn--loader-show");
+
+  pushHashItemToHTMLList(data, formHashAlgorithm);
+})
+
+
+function pushCrackItemToHTMLList(data) {
   formCrackOutput.insertAdjacentHTML("afterbegin", `
     <li>
       <div class="content">
@@ -69,5 +68,26 @@ formCrack.addEventListener("submit", async (e) => {
       <button class="btn btn--primary" id="copyBtn" data-hash=${data.hash} onclick="copyClick(this)">Copy</button>
     </li>
   `);
+}
+
+formCrack.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  formCrackSubmit.classList.add("btn--disabled");
+  formCrackSubmit.classList.add("btn--loader-show");
+
+  let {formCrackAlgorithm, textToCrack} = Object.fromEntries(new FormData(e.target));
+  let res = await fetch(`/api/crack/${formCrackAlgorithm}?hash=${encodeURI(textToCrack)}`)
+  let data = await res.json()
+
+  if (!res.ok) {
+    console.error("error");
+    return;
+  }
+
+  pushCrackItemToHTMLList(data);
+  formCrackSubmit.classList.remove("btn--disabled");
+  formCrackSubmit.classList.remove("btn--loader-show");
 })
+
 

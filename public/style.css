@@ -50,7 +50,57 @@ h1,h2,h3,h4 {
   border-radius: 2px;
   background: none;
   font-family: var(--font-sans);
+  text-align: center;
 }
+
+
+.btn--disabled {
+  opacity: .6;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.btn--txt {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.btn--primary:hover {
+  cursor: pointer;
+}
+
+.btn--loader-show .btn--txt {
+  display: none;
+}
+
+.btn--loader-show .btn--loader {
+  display: inline-block;
+}
+
+.btn--loader {
+  width: 20px;
+  height: 20px;
+  display: none;
+  border: 2px solid #FFF;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.btn--disabled:hover {
+  cursor: not-allowed;
+}
+
 
 .btn--primary {
   background-color: var(--clr-pink);
@@ -86,13 +136,6 @@ h2,h3,h4,h5 {
   outline: 1px solid var(--clr-purple-2);
 }
 
-
-.content .area {
-  display: flex;
-  flex-direction: column;
-  gap: .2rem;
-}
-
 .content .area textarea {
   resize: none;
   height: 150px;
@@ -105,17 +148,17 @@ h2,h3,h4,h5 {
   border-radius: 2px;
 }
 
+.content .proceed {
+  width: 100%;
+  display: flex;
+  gap: .5rem;
+  padding-block: .5rem;
+}
 
 .content textarea::placeholder {
   color: var(--clr-purple-1);
 }
 
-.content .proceed {
-  width: 100%;
-  display: flex;
-  gap: .2rem;
-  padding-block: .5rem;
-}
 
 .content .proceed select {
   background-color: var(--clr-purple-3);
@@ -162,6 +205,7 @@ h2,h3,h4,h5 {
   text-overflow: ellipsis;
   white-space: nowrap;
   display: block;
+  margin-bottom: .2rem;
 }
 
 .content .output-hash ul li .output {
@@ -177,7 +221,7 @@ h2,h3,h4,h5 {
 
 .content .output-hash ul i {
   color: var(--clr-purple-2);
-  margin-block: 1.2rem;
+  margin-block: 1rem;
   display: block;
 }
 
@@ -191,7 +235,7 @@ h2,h3,h4,h5 {
   display: flex;
   align-items: center;
   gap: .5rem;
-  margin-block: 2rem;
+  margin-block: 1.2rem;
   width: 90%;
 }
 
@@ -203,9 +247,8 @@ h2,h3,h4,h5 {
 }
 
 .section-crack {
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
 }
-
 
 @media screen and (min-width: 650px) {
   .content .output-hash ul li {
