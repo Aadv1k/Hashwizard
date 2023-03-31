@@ -105,3 +105,7 @@ Attempts to crack a given hash via a custom 20+ MB [Rainbow table](https://en.wi
    "status" : 400
 }
 ```
+
+### Credits
+
+- [danielmiessler/SecLists](https://github.com/danielmiessler/SecLists/) for the data provided for the Rainbow table
