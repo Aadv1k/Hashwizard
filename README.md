@@ -23,6 +23,21 @@ node ./index.js
 node ./tests/*.test.js
 ```
 
+### Miscellaneous
+
+```shell
+node ./lib/DumpRemoteTableToFile.js 
+```
+
+Created a `data/` directory in the `cwd` and fetches data in json format for each hash and dumps it to a `data/data-{hash}.json`
+
+```shell
+node ./lib/UpdateDBFromLocalIndex.js
+```
+Requires a `.txt` file with list of words separated by newline, converts and updates the database through each supported hash. 
+
+
+
 ## API
 
 ### `/api/hash/`
