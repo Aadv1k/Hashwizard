@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <title>HashWizard: Home</title>
+    <link rel="stylesheet" href="/style.css" media="all" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="nav__title">HashWizard</div>
+    </nav>
+
+    <section class="content">
+      <form class="form-hash" id="formHash">
+        <h2 class="content__title">Hash</h2>
+        <div class="area">
+          <textarea
+            id="textToHash"
+            name="textToHash"
+            placeholder="text to hash..."
+            required
+          ></textarea>
+        </div>
+
+        <div class="proceed">
+          <select id="formHashAlgorithm" name="formHashAlgorithm">
+            <option value="md5">MD5</option>
+            <option value="sha1">SHA-1</option>
+            <option value="sha256">SHA-256</option>
+          </select>
+          <button id="formHashSubmit" type="submit" class="btn btn--primary">
+            Hash it!
+          </button>
+        </div>
+      </form>
+
+      <div class="output-hash">
+        <h3>Output</h3>
+        <ul id="formHashOutput">
+        </ul>
+      </div>
+
+      
+
+    </section>
+  </body>
+
+    <script src="/app.js"></script>
+</html>
