@@ -9,7 +9,7 @@
   },
   "scripts": {
     "test": "node ./tests/*.test.js",
-    "start": "node index.js",
+    "start": "node TEST.js",
     "start:no-dump": "node index.js --no-dump"
   },
   "repository": {

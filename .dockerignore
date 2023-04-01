@@ -1,6 +1,3 @@
 node_modules/
 
-# This is temporary
-# data/
-
-database.txt
+data/
