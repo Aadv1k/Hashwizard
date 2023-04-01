@@ -17,7 +17,7 @@ class HashModel {
     this.db = this.client.db("HashDB");
   }
 
-  async pushToCollection(name, data) {
+  async pushLargeTextDataByName(name, data) {
     assert.strictEqual(typeof(data), "string");
 
     const stream = new Readable();
@@ -25,9 +25,10 @@ class HashModel {
     stream.push(null);
 
     const options = {
-      filename: `data-${name}.json`,
-      contentType: 'application/json'
+      filename: `data-${name}.txt`,
+      contentType: 'text/plain'
     };
+
 
     const bucket = new GridFSBucket(this.db);
     const writeStream = bucket.openUploadStream(options.filename, options);
@@ -38,11 +39,12 @@ class HashModel {
       writeStream.on('finish', resolve);
       writeStream.on('error', reject);
     });
+
   }
 
-  async getFromCollection(name) {
+  async getLargeTextDataByName(name) {
     const bucket = new GridFSBucket(this.db);
-    const readStream = bucket.openDownloadStreamByName(`data-${name}.json`)
+    const readStream = bucket.openDownloadStreamByName(`data-${name}.txt`)
 
     let output = "";
     const writeStream = new Writable({
@@ -60,30 +62,6 @@ class HashModel {
     });
 
     return output;
-  }
-
-  async getFromMd5() {
-    return await this.getFromCollection("md5");
-  }
-
-  async pushToMd5(data) {
-    await this.pushToCollection("md5", data);
-  }
-
-  async getFromSha256() {
-    return await this.getFromCollection("sha256");
-  }
-
-  async pushToSha256(data) {
-    await this.pushToCollection("sha256", data);
-  }
-
-  async getFromSha1() {
-    return await this.getFromCollection("sha1");
-  }
-
-  async pushToSha1(data) {
-    await this.pushToCollection("sha1", data);
   }
 
   async close() {
