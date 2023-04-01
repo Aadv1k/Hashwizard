@@ -9,7 +9,8 @@
   },
   "scripts": {
     "test": "node ./tests/*.test.js",
-    "start": "node server.js"
+    "start": "node index.js",
+    "start:no-dump": "node index.js --no-dump"
   },
   "repository": {
     "type": "git",
