@@ -4,6 +4,15 @@ is a suite of tools and APIs that allow you to interact with `hashing`
 
 ## Get
 
+### Docker
+
+The application is dockerized to simulate app on low memory enviorments
+
+```shell
+docker build -t hashwizard-dev .
+docker run -p 8080:3000 --memory=512m hashwizard-dev # forward 3000 to 8080
+```
+
 ### Server
 
 ```shell
