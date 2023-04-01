@@ -55,7 +55,6 @@ module.exports = async ({ url }, res) => {
 
   if (existsSync(dataFolderPath)) {
     crackedText = extractCrackQueryFromDataChunks(dataFolderPath, hashAlgorithm, textToCrack);
-    return;
   } else {
     rawJson = await DB.getFromCollection(hashAlgorithm)
     crackedText = Table.getFromJson(rawJson, textToCrack);
