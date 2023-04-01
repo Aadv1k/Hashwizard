@@ -2,8 +2,9 @@ const { sendJsonResponse } = require("../common/utils");
 const { ERROR } = require("../common/const");
 const RainbowTable = require("../lib/RainbowTable");
 const path = require("path");
+const assert = require("assert");
 
-const { existsSync, readFileSync } = require("fs");
+const { existsSync, readFileSync, readdirSync } = require("fs");
 
 const HashModel = require("../models/HashModel");
 
@@ -11,6 +12,22 @@ const DB = new HashModel();
 const Table = new RainbowTable("");
 
 const querystring = require("querystring");
+
+function extractCrackQueryFromDataChunks(dataFolderPath, hashAlgorithm, textToCrack) {
+  const files = readdirSync(dataFolderPath);
+  assert.strictEqual(typeof(textToCrack), "string");
+  const table = new RainbowTable(hashAlgorithm);
+
+  for (let i = 0; i < files.length; i++) {
+    const fullJSONChunkPath = path.join(dataFolderPath, files[i]);
+    const foundHash = table.getFromJson(readFileSync(fullJSONChunkPath, 'utf-8'), textToCrack)
+    if (foundHash) {
+      return foundHash;
+    }
+    continue;
+  }
+  return null;
+}
 
 module.exports = async ({ url }, res) => {
   let [_e, _a, _f, hashAlgorithm] = url.split("?").shift().split("/");
@@ -21,34 +38,34 @@ module.exports = async ({ url }, res) => {
     sendJsonResponse(res, ERROR.invalidHashFunc, 400);
     return;
   }
-  const { hash } = querystring.parse(url.split("?").pop());
+  const { hash: textToCrack } = querystring.parse(url.split("?").pop());
 
-  if (!hash) {
+  if (!textToCrack) {
     sendJsonResponse(res, ERROR.missingHashParam, 400);
     return;
   }
 
   await DB.init();
 
-  let rawJson;
 
 
-  let dataPath = path.join(__dirname, `../data/data-${hashAlgorithm}.json`)
+  let dataFolderPath = path.join(__dirname, `../data/data-${hashAlgorithm}/`)
 
+  let rawJson, crackedText;
 
-  if (existsSync(dataPath)) {
-    rawJson = readFileSync(dataPath, 'utf-8');
+  if (existsSync(dataFolderPath)) {
+    crackedText = extractCrackQueryFromDataChunks(dataFolderPath, hashAlgorithm, textToCrack);
+    return;
   } else {
     rawJson = await DB.getFromCollection(hashAlgorithm)
+    crackedText = Table.getFromJson(rawJson, textToCrack);
   }
 
-
-  let crackedText = Table.getFromJson(rawJson, hash);
   if (!crackedText) {
     sendJsonResponse(res, {
       status: 200,
       message: "was unable to crack the given hash",
-      hash,
+      hash: textToCrack,
       text: null,
     });
     return;
@@ -57,7 +74,7 @@ module.exports = async ({ url }, res) => {
   sendJsonResponse(res, {
     status: 200,
     message: "successfully cracked the given hash",
-    hash,
+    hash: textToCrack,
     text: crackedText,
   });
   
