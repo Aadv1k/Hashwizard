@@ -46,9 +46,6 @@ module.exports = async ({ url }, res) => {
     return;
   }
 
-  await DB.init();
-
-
   let dataFolderPath = path.join(__dirname, `../data/data-${hashAlgorithm}/`)
 
   let rawText, crackedText;
@@ -58,8 +55,10 @@ module.exports = async ({ url }, res) => {
   } else {
     sendJsonResponse(ERROR.internalErr);
     // README: This works, but may overflow our limited memory enviorment
+    // DB.init()
     // rawText = await DB.getLargeTextDataByName(dump1)
     // crackedText = Table.fromArray(rawText.split('\n')).get(textToCrack);
+    // await DB.close();
     return;
   }
 
@@ -80,5 +79,4 @@ module.exports = async ({ url }, res) => {
     text: crackedText,
   });
   
-  await DB.close();
 };
