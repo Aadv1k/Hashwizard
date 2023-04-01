@@ -1,4 +1,6 @@
 module.exports = {
+  dump1: "github-danielmiessler-seclists",
+
   ERROR: {
     invalidHashFunc: {
       status: 400,

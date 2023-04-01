@@ -1,8 +1,9 @@
 const { sendJsonResponse } = require("../common/utils");
-const { ERROR } = require("../common/const");
+const { ERROR, dump1 } = require("../common/const");
 const RainbowTable = require("../lib/RainbowTable");
 const path = require("path");
 const assert = require("assert");
+
 
 const { existsSync, readFileSync, readdirSync } = require("fs");
 
@@ -48,16 +49,18 @@ module.exports = async ({ url }, res) => {
   await DB.init();
 
 
-
   let dataFolderPath = path.join(__dirname, `../data/data-${hashAlgorithm}/`)
 
-  let rawJson, crackedText;
+  let rawText, crackedText;
 
   if (existsSync(dataFolderPath)) {
     crackedText = extractCrackQueryFromDataChunks(dataFolderPath, hashAlgorithm, textToCrack);
   } else {
-    rawJson = await DB.getFromCollection(hashAlgorithm)
-    crackedText = Table.getFromJson(rawJson, textToCrack);
+    sendJsonResponse(ERROR.internalErr);
+    // README: This works, but may overflow our limited memory enviorment
+    // rawText = await DB.getLargeTextDataByName(dump1)
+    // crackedText = Table.fromArray(rawText.split('\n')).get(textToCrack);
+    return;
   }
 
   if (!crackedText) {
