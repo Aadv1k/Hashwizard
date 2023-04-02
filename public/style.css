@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inconsolata&family=Karla:wght@400;500;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Eagle+Lake&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Eagle+Lake&family=Karla:wght@400;700&display=swap');
 
 :root {
   --clr-purple-4: #1c1938;
@@ -9,7 +8,8 @@
   --clr-pink: #d27685;
   --clr-pink-2: #9f5964;
 
-  --font-mono: Inconsolata, Consolas, Monospace;
+  --font-mono: Consolas, Monospace;
+  --font-serif: 'Eagle Lake', sans-serif;
   --font-sans: Karla, Tahoma, Helvetica, sans-serif;
 }
 
@@ -25,23 +25,68 @@ body {
 }
 
 
-section, nav {
-  max-width: 800px;
-  margin: 0 auto;
+code {
+  background: var(--clr-purple-2);
+  font-family: var(--font-mono);
+  color: #fff;
+  margin-right: .5rem;
 }
 
+code.title-code {
+  display: block;
+  margin-block: .4rem;
+  max-width: fit-content;
+  padding: .2rem .3rem;
+  border-radius: 2px;
+}
+
+
+section, nav, main, div.or {
+  max-width: 900px;
+  margin: 0 auto;
+  width: 90%;
+}
+
+section {
+  margin-bottom: 1.4rem;
+}
 
 .navbar {
-  width: 100%;
   display: flex;
-  justify-content: center;
-  padding: .7rem .5rem;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: .7rem 0;
   margin: 0 auto;
+  align-items: center;
 }
+
+.nav__links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.nav__links a {
+  font-size: 1.2rem;
+  color: var(--clr-pink);
+}
+
+.main__intro, .how-it-works {
+  line-height: 1.5;
+  color: var(--clr-purple-2);
+  font-size: 1.2rem;
+  margin-block: .5rem;
+}
+
+.main__intro b, .how-it-works b {
+  color: var(--clr-purple-1);
+}
+
 
 h1,h2,h3,h4 {
   color: white;
-  font-family: 'Eagle Lake', cursive;
+  font-family: var(--font-serif);
   font-weight: bold;
 }
 
@@ -78,8 +123,8 @@ h1,h2,h3,h4 {
 }
 
 .btn--loader {
-  width: 20px;
-  height: 20px;
+  height: 60%;
+  aspect-ratio: 1;
   display: none;
   border: 2px solid #FFF;
   border-bottom-color: transparent;
@@ -116,14 +161,10 @@ h1,h2,h3,h4 {
 .nav__title {
   font-size: clamp(2rem, 10vw, 2.5rem);
   color: white;
-  font-family: 'Eagle Lake', cursive;
+  font-family: var(--font-serif);
   font-weight: bold;
+  text-decoration: none;
 }
-
-.content {
-  width: 90%;
-}
-
 h2,h3,h4,h5 {
   color: var(--clr-pink);
 }
@@ -182,11 +223,6 @@ h2,h3,h4,h5 {
 }
 
 
-
-.output-hash .btn--primary {
-  height: 25px;
-}
-
 .content .output-hash ul li {
   padding: .5rem .3rem;
   display: flex;
@@ -208,6 +244,10 @@ h2,h3,h4,h5 {
   margin-bottom: .2rem;
 }
 
+.output-hash .btn--primary {
+  height: 30px;
+}
+
 .content .output-hash ul li .output {
   word-wrap: break-word;
   display: block;
@@ -217,6 +257,7 @@ h2,h3,h4,h5 {
   background-color: var(--clr-purple-2);
   font-family: var(--font-mono);
   padding: .1rem;
+  word-break: break-word;
 }
 
 .content .output-hash ul i {
@@ -251,6 +292,10 @@ h2,h3,h4,h5 {
 }
 
 @media screen and (min-width: 650px) {
+  .navbar {
+    flex-direction: row;
+  }
+
   .content .output-hash ul li {
     flex-direction: row;
     justify-content: space-between;
@@ -258,8 +303,8 @@ h2,h3,h4,h5 {
   }
 
   .output-hash .btn--primary {
-    width: 40px;
-    height: 40px;
+    padding: .5rem;
+    height: 100%;
   }
 
   .content .area {

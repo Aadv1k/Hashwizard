@@ -14,7 +14,14 @@ module.exports = http.createServer(async (req, res) => {
     handleRouteHash(req, res)
   } else if (url.startsWith("/api/crack")) {
     await handleRouteCrack(req, res)
-  } else {
+  } else if (url.startsWith("/crack")) {
+    sendPublicFile(res, `./public/crack.html`);
+  } else if (url.startsWith("/hash")) {
+    sendPublicFile(res, `./public/hash.html`);
+  } else if (url.startsWith("/api")) {
+    sendPublicFile(res, `./public/api.html`);
+  }
+  else {
     sendPublicFile(res, `./public/${url}`);
   }
   res.end();

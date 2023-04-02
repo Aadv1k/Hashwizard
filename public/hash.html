@@ -8,7 +8,6 @@
     />
     <title>HashWizard: Home</title>
     <link rel="stylesheet" href="/style.css" media="all" />
-
   </head>
   <body>
     <nav class="navbar">
@@ -19,9 +18,6 @@
         <li><a href="/api">API</a></li>
       </ul>
     </nav>
-    <main>
-      <p class="main__intro"></b> is a simple yet intuitive tool to <b>hash</b> existing text via various hash functions such as md5, sha1, sha256 and many more. It also allows you to <b>crack</b> existing hashes via a massive lookup table.</p>
-    </main>
 
     <section class="content">
       <form class="form-hash" id="formHash">
@@ -48,7 +44,6 @@
             <option value="shake128">SHAKE-128</option>
             <option value="shake256">SHAKE-256</option>
           </select>
-
           <button id="formHashSubmit" type="submit" class="btn btn--primary">
             <span class="btn--loader"></span>
             <span class="btn--txt">Hash it!</span>
@@ -61,6 +56,13 @@
         <ul id="formHashOutput">
         </ul>
       </div>
+    </section>
+
+    <section class="content">
+      <h2 class="content__title">How it works</h2>
+      <p class="how-it-works">
+        Hashing works by taking a piece of text and passing it through various "transformers" which turn the original text to a mangled string of letters.
+      </p>
     </section>
 
 

@@ -30,7 +30,7 @@ function pushHashItemToHTMLList(data, formHashAlgorithm) {
   `);
 }
 
-formHash.addEventListener("submit", async (e) => {
+formHash?.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   formHashSubmit.classList.add("btn--disabled");
@@ -72,7 +72,7 @@ function pushCrackItemToHTMLList(data) {
   `);
 }
 
-formCrack.addEventListener("submit", async (e) => {
+formCrack?.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   formCrackSubmit.classList.add("btn--disabled");
