@@ -6,7 +6,7 @@
       name="viewport"
       content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
     />
-    <title>HashWizard: Not found</title>
+    <title>HashWizard: API</title>
     <link rel="stylesheet" href="/style.css" media="all" />
   </head>
   <body>
@@ -20,8 +20,17 @@
     </nav>
 
     <section class="content">
-      <h2 class="content__title">Not found!</h2>
+      <h2><code class="title-code">/api/hash/:hash</code></h2>
+      <p class="how-it-works"><code>:hash</code> any supported hashing function</p>
+      <p class="how-it-works"><code>?text=</code> text to hash</p>
     </section>
+
+    <section class="content">
+      <h2><code class="title-code">/api/crack/:hash</code></h2>
+      <p class="how-it-works"><code>:hash</code> any supported hashing function</p>
+      <p class="how-it-works"><code>?hash=</code>hash to crack</p>
+    </section>
+
   </body>
   <script src="/app.js"></script>
 </html>
