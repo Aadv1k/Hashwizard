@@ -1,5 +1,7 @@
 # hashwizard
 
+![hashwizard-cover](https://user-images.githubusercontent.com/81357878/229335093-081ee3c1-133e-4ee5-9b85-3ab8cfebf2d7.gif)
+
 is a suite of tools and APIs that allow you to interact with `hashing`
 
 ## Get
