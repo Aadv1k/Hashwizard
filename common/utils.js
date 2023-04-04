@@ -15,8 +15,9 @@ module.exports = {
     }
 
     const content = readFileSync(path, "utf-8");
+    const ext = path.split(".").pop();
     // will work for JavaScript, CSS and html which is mostly what we care about
-    res.writeHead(code, { "Content-type": `text/${path.split(".").pop()}` });
+    res.writeHead(code, { "Content-type": `text/${ext === "js" ? "javascript" : ext}` });
     res.write(content);
     return;
   },
