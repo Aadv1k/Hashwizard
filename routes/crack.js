@@ -78,5 +78,6 @@ module.exports = async ({ url }, res) => {
     hash: textToCrack,
     text: crackedText,
   });
-  
+
+  res.end();
 };

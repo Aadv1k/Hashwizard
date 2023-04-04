@@ -9,11 +9,13 @@ let formCrackSubmit = document.getElementById("formCrackSubmit");
 let formCrackOutput = document.getElementById("formCrackOutput");
 
 function copyClick(e) {
-  navigator.clipboard.writeText(e.getAttribute('data-hash'))
+  navigator.clipboard.writeText(e.getAttribute("data-hash"));
 }
 
 function pushHashItemToHTMLList(data, formHashAlgorithm) {
-  formHashOutput.insertAdjacentHTML("afterbegin", `
+  formHashOutput.insertAdjacentHTML(
+    "afterbegin",
+    `
     <li>
       <div class="content">
         <span class="input">
@@ -25,9 +27,12 @@ function pushHashItemToHTMLList(data, formHashAlgorithm) {
         </span>
       </div>
 
-      <button class="btn btn--primary" id="copyBtn" data-hash=${data.hash} onclick="copyClick(this)">Copy</button>
+      <button class="btn btn--primary" id="copyBtn" data-hash=${
+        data.hash
+      } onclick="copyClick(this)">Copy</button>
     </li>
-  `);
+  `
+  );
 }
 
 formHash?.addEventListener("submit", async (e) => {
@@ -36,26 +41,29 @@ formHash?.addEventListener("submit", async (e) => {
   formHashSubmit.classList.add("btn--disabled");
   formHashSubmit.classList.add("btn--loader-show");
 
-  let {formHashAlgorithm, textToHash} = Object.fromEntries(new FormData(e.target));
+  let { formHashAlgorithm, textToHash } = Object.fromEntries(
+    new FormData(e.target)
+  );
   textToHash = textToHash.trim();
 
-  let res = await fetch(`/api/hash/${formHashAlgorithm}?text=${encodeURI(textToHash)}`)
-  let data = await res.json()
-
-  if (!res.ok) {
-    console.error("error");
-    return;
+  try {
+    let res = await fetch(
+      `/api/hash/${formHashAlgorithm}?text=${encodeURI(textToHash)}`
+    );
+    let data = await res.json();
+    pushHashItemToHTMLList(data, formHashAlgorithm);
+  } catch (error) {
+    console.error(error);
   }
 
   formHashSubmit.classList.remove("btn--disabled");
   formHashSubmit.classList.remove("btn--loader-show");
-
-  pushHashItemToHTMLList(data, formHashAlgorithm);
-})
-
+});
 
 function pushCrackItemToHTMLList(data) {
-  formCrackOutput.insertAdjacentHTML("afterbegin", `
+  formCrackOutput.insertAdjacentHTML(
+    "afterbegin",
+    `
     <li>
       <div class="content">
         <span class="input">
@@ -67,9 +75,12 @@ function pushCrackItemToHTMLList(data) {
         </span>
       </div>
 
-      <button class="btn btn--primary" id="copyBtn" data-hash=${data.hash} onclick="copyClick(this)">Copy</button>
+      <button class="btn btn--primary" id="copyBtn" data-hash=${
+        data.hash
+      } onclick="copyClick(this)">Copy</button>
     </li>
-  `);
+  `
+  );
 }
 
 formCrack?.addEventListener("submit", async (e) => {
@@ -78,19 +89,21 @@ formCrack?.addEventListener("submit", async (e) => {
   formCrackSubmit.classList.add("btn--disabled");
   formCrackSubmit.classList.add("btn--loader-show");
 
-  let {formCrackAlgorithm, textToCrack} = Object.fromEntries(new FormData(e.target));
+  let { formCrackAlgorithm, textToCrack } = Object.fromEntries(
+    new FormData(e.target)
+  );
   textToCrack = textToCrack.trim();
-  let res = await fetch(`/api/crack/${formCrackAlgorithm}?hash=${encodeURI(textToCrack)}`)
-  let data = await res.json()
 
-  if (!res.ok) {
-    console.error("error");
-    return;
+  try {
+    let res = await fetch(
+      `/api/crack/${formCrackAlgorithm}?hash=${encodeURI(textToCrack)}`
+    );
+    let data = await res.json();
+    pushCrackItemToHTMLList(data);
+  } catch (error) {
+    console.error(error);
   }
 
-  pushCrackItemToHTMLList(data);
   formCrackSubmit.classList.remove("btn--disabled");
   formCrackSubmit.classList.remove("btn--loader-show");
-})
-
-
+});

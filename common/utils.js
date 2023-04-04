@@ -19,6 +19,7 @@ module.exports = {
     // will work for JavaScript, CSS and html which is mostly what we care about
     res.writeHead(code, { "Content-type": `text/${ext === "js" ? "javascript" : ext}` });
     res.write(content);
+    res.end();
     return;
   },
 

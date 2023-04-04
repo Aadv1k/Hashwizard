@@ -49,4 +49,5 @@ module.exports = ({ url }, res) => {
     },
     200
   );
+  res.end();
 };
