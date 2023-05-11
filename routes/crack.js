@@ -53,7 +53,7 @@ module.exports = async ({ url }, res) => {
   if (existsSync(dataFolderPath)) {
     crackedText = extractCrackQueryFromDataChunks(dataFolderPath, hashAlgorithm, textToCrack);
   } else {
-    sendJsonResponse(ERROR.internalErr);
+		 sendJsonResponse(res, ERROR.internalErr, 500);
     // README: This works, but may overflow our limited memory enviorment
     // DB.init()
     // rawText = await DB.getLargeTextDataByName(dump1)
@@ -78,6 +78,4 @@ module.exports = async ({ url }, res) => {
     hash: textToCrack,
     text: crackedText,
   });
-
-  res.end();
 };
