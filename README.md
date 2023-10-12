@@ -2,7 +2,7 @@
 
 ![hashwizard-cover](https://user-images.githubusercontent.com/81357878/229335093-081ee3c1-133e-4ee5-9b85-3ab8cfebf2d7.gif)
 
-is a suite of tools and APIs that allow you to interact with `hashing`
+A service and a front-end for a 20 MB+ Rainbow Table implementation which runs in a low-memory enviorment
 
 ## Get
 
